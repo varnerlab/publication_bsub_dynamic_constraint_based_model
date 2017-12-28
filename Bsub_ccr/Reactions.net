@@ -1,0 +1,72 @@
+// ============================================================== //
+// Signal transduction/metabolic reactions -
+#pragma::metabolic_reaction_handler
+//
+// Record:
+// name (unique),reactants,products,reverse,forward
+//
+// Notes:
+// [] = system (not tracked)
+//
+// ============================================================= //
+//PTS Systems
+//r_ei,M_pep_c+ei,M_pyr_c+eip,0,inf
+//r_hpr,eip+M_Hpr_c,ei+M_HprHis_c,0,inf
+//r_eii,M_HprHis_c+eiiGlc,M_Hpr_c+eiiGlcP,0,inf
+M_glc_uptake,M_glc_e,M_g6p_c,0,inf
+
+// Sugar sink -
+M_g6p_sink,M_g6p_c,[],0,inf
+//M_pep_source,[],M_pep_c,0,inf
+//M_pyr_sink,M_pyr_c,[],0,inf
+
+// Xylose metabolism -
+M_xylosides_uptake,M_xylosides_e,M_xylosides,0,inf
+generation_of_xylose,M_xylosides,M_xylose,0,inf
+generation_of_xylulose,M_xylose,M_xylulose,0,inf
+generation_of_xylulose_5P,M_xylulose,M_xylulose_5P,0,inf
+transfer_of_xylulose_5P,M_xylulose_5P,[],0,inf
+
+//HprSer Phosphorylation
+generation_of_hpr,[],M_Hpr_c,0,inf
+activation_of_hpr,M_Hpr_c,M_HprSerP_c,0,inf
+degrdation_HprSerP_active,M_HprSerP_c,[],0,inf
+
+// CcpA generation and degradation -
+generation_of_CcpA,[],M_CcpA_c,0,inf
+activation_of_CcpA,M_CcpA_c+M_HprSerP_c,M_CcpAHpr_c,0,inf
+degrdation_CcpA_active,M_CcpAHpr_c,[],0,inf
+
+//XylR_deactive
+generation_of_XylR_deactive,XylR,XylR_deactive,0,inf
+degradation_XylR_deactive,XylR_deactive,[],0,inf
+
+//PTS Protein Synthesis
+M_eiiGlc_synthesis,[],eiiGlc,0,inf
+//M_eiiFru_synthesis,eiiFru_gene,eiiFru,0,inf
+//M_eiiMan_synthesis,eiiMan_gene,eiiMan,0,inf
+//M_eiiGly_synthesis,eiiGly_gene,eiiGly,0,inf
+//M_eiiSal_synthesis,eiiSal_gene,eiiSal,0,inf
+//M_eiiSuc_synthesis,eiiSuc_gene,eiiSuc,0,inf
+//M_eiiMal_synthesis,eiiMal_gene,eiiMal,0,inf
+M_xynP_synthesis,[],XynP,0,inf
+M_xynB_synthesis,[],XynB,0,inf
+M_xylR_synthesis,[],XylR,0,inf
+M_xylA_synthesis,[],XylA,0,inf
+M_xylB_synthesis,[],XylB,0,inf
+M_HprK_synthesis,[],HprK,0,inf
+
+// Degrdation of xylose proteins -
+degradation_eiiGlc,eiiGlc,[],0,inf
+//degradation_eiiFru,eiiFru,eiiFru_e,0,inf
+//degradation_eiiMan,eiiMan,eiiMan_e,0,inf
+//degradation_eiiGly,eiiGly,eiiGly_e,0,inf
+//degradation_eiiSal,eiiSal,eiiSal_e,0,inf
+//degradation_eiiSuc,eiiSuc,eiiSuc_e,0,inf
+//degradation_eiiMal,eiiMal,eiiMal_e,0,inf
+degradation_XylR,XylR,[],0,inf
+degradation_XylA,XylA,[],0,inf
+degradation_XylB,XylB,[],0,inf
+degradation_XynP,XynP,[],0,inf
+degradation_XynB,XynB,[],0,inf
+degradation_HprK,HprK,[],0,inf

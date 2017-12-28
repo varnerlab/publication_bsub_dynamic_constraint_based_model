@@ -1,0 +1,139 @@
+// ============================================================ //
+// Test model file for the Kwatee GRN plugin
+// Author: J. Varner
+// Version: 1.0
+// ============================================================ //
+//
+// ============================================================ //
+// Signal transduction reactions -
+#pragma handler_class = VLCGSignalTransductionParserDelegate
+// ============================================================ //
+
+// Sugar uptake -
+glucose_update,[],M_glc_c,-inf,inf;
+fructose_uptake,[],M_fru_c,-inf,inf;
+mannitol_uptake,[],M_man_c,-inf,inf;
+glycerol_uptake,[],M_gly_c,-inf,inf;
+sorbitol_uptake,[],M_sor_c,-inf,inf;
+salicin_uptake,[],M_sal_c,-inf,inf;
+M_sucrose_uptake,[],M_suc_c,-inf,inf;
+M_gluconate_uptake,[],M_glu_c,-inf,inf;
+M_maltose_uptake,[],M_mal_c,-inf,inf;
+M_arabinose_uptake,[],M_ara_c,-inf,inf;
+M_ribose_uptake,[],M_rib_c,-inf,inf;
+M_background_xyl_uptake,[],M_xylose,0,inf;
+
+// CcpA generation and degrdation -
+generation_of_CcpA,[],CcpA,-inf,inf;
+activation_of_CcpA,CcpA,CcpA_active,0,inf;
+background_activation_of_CcpA,[],CcpA_active,0,inf;
+degrdation_CcpA_active,CcpA_active,[],0,inf;
+
+// Xylose metabolism -
+xylose_uptake,[],M_xylosides,0,inf;
+generation_of_xylose,M_xylosides,M_xylose,0,inf;
+generation_of_xylulose,M_xylose,M_xylulose,0,inf;
+generation_of_xylulose_5P,M_xylulose,M_xylulose_5P,0,inf;
+transfer_of_xylulose_5P,M_xylulose_5P,[],0,inf;
+
+// Infrastructure -
+RNAP_assembly,RNAP,[],-inf,inf;
+RIOBOSOME_assembly,RIBOSOME,[],-inf,inf;
+
+// Degrdation of xylose proteins -
+degradation_XylR,XylR,[],0,inf;
+degradation_XylA,XylA,[],0,inf;
+degradation_XylB,XylB,[],0,inf;
+degradation_XynP,XynP,[],0,inf;
+degradation_XynB,XynB,[],0,inf;
+
+//XylR_deactive
+generation_of_XylR_deactive,XylR,XylR_deactive,0,inf;
+degradation_XylR_deactive,XylR_deactive,[],0,inf;
+
+// ============================================================ //
+// Control terms signal transduction -
+#pragma handler_class = VLCGSignalTransductionControlParserDelegate
+// ============================================================ //
+
+// activation of CcpA by sugars -
+activation_CcpA_by_glc,M_glc_c,activation_of_CcpA,activation;
+activation_CcpA_by_fru,M_fru_c,activation_of_CcpA,activation;
+activation_CcpA_by_man,M_man_c,activation_of_CcpA,activation;
+activation_CcpA_by_gly,M_gly_c,activation_of_CcpA,activation;
+activation_CcpA_by_sor,M_sor_c,activation_of_CcpA,activation;
+activation_CcpA_by_sal,M_sal_c,activation_of_CcpA,activation;
+activation_CcpA_by_suc,M_suc_c,activation_of_CcpA,activation;
+activation_CcpA_by_glu,M_glu_c,activation_of_CcpA,activation;
+activation_CcpA_by_mal,M_mal_c,activation_of_CcpA,activation;
+activation_CcpA_by_ara,M_ara_c,activation_of_CcpA,activation;
+activation_CcpA_by_rib,M_rib_c,activation_of_CcpA,activation;
+
+// Xylose metabolism -
+catalysis_xylose_uptake,XynP,xylose_uptake,activation;
+catalysis_generation_of_xylose,XynB,generation_of_xylose,activation;
+catalysis_generation_of_xylulose,XylA,generation_of_xylulose,activation;
+catalysis_generation_of_xylulose_5P,XylB,generation_of_xylulose_5P,activation;
+
+//XylR_deactive_PlusAllSugars
+control_XylR_deactive,M_xylose,generation_of_XylR_deactive,activation;
+control_glc,M_glc_c,generation_of_XylR_deactive,inhibition;
+control_fru,M_fru_c,generation_of_XylR_deactive,inhibition;
+control_man,M_man_c,generation_of_XylR_deactive,inhibition;
+control_gly,M_gly_c,generation_of_XylR_deactive,inhibition;
+control_sor,M_sor_c,generation_of_XylR_deactive,inhibition;
+control_sal,M_sal_c,generation_of_XylR_deactive,inhibition;
+control_suc,M_suc_c,generation_of_XylR_deactive,inhibition;
+control_glu,M_glu_c,generation_of_XylR_deactive,inhibition;
+control_mal,M_mal_c,generation_of_XylR_deactive,inhibition;
+control_ara,M_ara_c,generation_of_XylR_deactive,inhibition;
+control_rib,M_rib_c,generation_of_XylR_deactive,inhibition;
+// ============================================================ //
+// Gene expression reactions -
+#pragma handler_class = VLCGGeneExpressionParserDelegate
+// ============================================================ //
+
+// induction xynP, xynB and xylR -
+induction_xynP,gene_xynP,mRNA_xynP,RNAP;
+induction_xynB,gene_xynB,mRNA_xynB,RNAP;
+induction_xylR,gene_xylR,mRNA_xylR,RNAP;
+
+// induction xylA and xylB -
+induction_xylA,gene_xylA,mRNA_xylA,RNAP;
+induction_xylB,gene_xylB,mRNA_xylB,RNAP;
+
+// ============================================================ //
+// Translation reactions -
+#pragma handler_class = VLCGTranslationParserDelegate
+// ============================================================ //
+
+// translation xynP, xynB and xylR -
+translation_mRNA_xynP,mRNA_xynP,XynP,RIBOSOME;
+translation_mRNA_xynB,mRNA_xynB,XynB,RIBOSOME;
+translation_mRNA_xylR,mRNA_xylR,XylR,RIBOSOME;
+
+// translation xylA and xylB -
+translation_mRNA_xylA,mRNA_xylA,XylA,RIBOSOME;
+translation_mRNA_xylB,mRNA_xylB,XylB,RIBOSOME;
+
+// ============================================================ //
+// Control terms gene expression -
+#pragma handler_class = VLCGGeneExpressionControlParserDelegate
+// ============================================================ //
+
+// XylR repression -
+control_xynP_expression_XylR,XylR,induction_xynP,repression;
+control_xynB_expression_XylR,XylR,induction_xynB,repression;
+control_xylA_expression_XylR,XylR,induction_xylA,repression;
+control_xylB_expression_XylR,XylR,induction_xylB,repression;
+
+//control_xynP_expression_XylR_xlyose,XylR*M_xylose,induction_xynP,induction;
+//control_xynB_expression_XylR_xlyose,XylR*M_xylose,induction_xynB,induction;
+//control_xylA_expression_XylR_xlyose,XylR*M_xylose,induction_xylA,induction;
+//control_xylB_expression_XylR_xlyose,XylR*M_xylose,induction_xylB,induction;
+
+// CcpA repression -
+control_xynP_expression_CcpA,CcpA_active,induction_xynP,repression;
+control_xynB_expression_CcpA,CcpA_active,induction_xynB,repression;
+control_xylA_expression_CcpA,CcpA_active,induction_xylA,repression;
+control_xylB_expression_CcpA,CcpA_active,induction_xylB,repression;

@@ -1,0 +1,17 @@
+1 T_A::A_e --> A_c
+2 T_B::B_c --> B_e
+3 r_A::A_c --> B_c
+4 TA_synthesis::[] --> TA
+5 TA_degradation::TA --> []
+6 E_synthesis::[] --> E
+7 E_degradation::E --> []
+8 TB_synthesis::[] --> TB
+9 TB_degradation::TB --> []
+
+1 A_c
+2 B_c
+3 E
+4 TA
+5 TB
+6 A_e
+7 B_e

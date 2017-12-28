@@ -1,0 +1,58 @@
+// ============================================================== //
+// Signal transduction/metabolic reactions -
+#pragma::metabolic_reaction_handler
+//
+// Record:
+// name (unique),reactants,products,reverse,forward
+//
+// Notes:
+// [] = system (not tracked)
+//
+// ============================================================= //
+
+// ======================================================================
+// GLYCOLYSIS/ GLUCONEOGENESIS
+// ======================================================================
+r_pgi,M_g6p_c,M_f6p_c,-inf,inf;
+r_fba,M_f6p_c+M_atp_c,2*M_t3p_c+M_adp_c,0,inf;
+r_pgk,M_t3p_c+M_adp_c+M_nad_c,M_pga_c+M_atp_c+M_nadh_c,-inf,inf;
+r_eno,M_pga_c,M_pep_c,-inf,inf;
+r_pyk,M_pep_c+M_adp_c,M_pyr_c+M_atp_c,0,inf;
+r_pdh,M_pyr_c+M_nad_c,M_accoa_c+M_co2_c+M_nadh_c,0,inf;
+
+// ======================================================================
+// PENTOSE PHOSPHATE PATHWAY
+// ======================================================================
+r_zwf,M_g6p_c+2*M_nadp_c,M_p5p_c+M_co2_c+2*M_nadph_c,0,inf;
+r_tkt,M_p5p_c+M_e4p_c,M_f6p_c+M_t3p_c,-inf,inf;
+r_tkt2,2*M_p5p_c,M_s7p_c+M_t3p_c,-inf,inf;
+r_ywj,M_s7p_c+M_t3p_c,M_e4p_c+M_f6p_c,-inf,inf;
+
+
+// ======================================================================
+// TCA CYCLE
+// ======================================================================
+r_cit,M_accoa_c+M_oaa_c+M_nadp_c,M_oga_c+M_nadph_c+M_co2_c,0,inf;
+r_succ,M_oga_c+M_nad_c,M_nadh_c+M_co2_c+M_succ_c,0,inf;
+r_mal,M_succ_c+M_fad_c,M_fadh_c+M_mal_c,0,inf;
+r_oaa,M_mal_c+M_nad_c
+
+r_pyc,M_pyr_c+M_co2_c+M_atp_c,M_oaa_c+M_adp_c,0,inf;
+r_pck,M_oaa_c+M_atp_c,M_pep_c+M_co2_c+M_adp_c,0,inf;
+
+r_ace,M_accoa_c,M_ace_c+1.25*M_atp_c,-inf,inf;
+r_bio,35.115*M_atp_c+14.405*M_nadph_c+0.712*M_g6p_c+0.445*M_p5p_c+0.397*M_e4p_c+0.428*M_t3p_c+1.241*M_pga_c+0.642*M_pep_c+2.994*M_pyr_c+2.097*M_accoa_c+1.785*M_oaa_c+1.236*M_oga_c+0.262*M_ser_c+0.542*M_gly_c+0.411*M_c1_c+,biomass_c+3.015*M_nadh_c+2.852*M_co2_c,0,inf;
+
+//OxidativePhosphorylation
+r_nadph,M_nadph_c,M_nadh_c,0,inf;
+r_nadh,M_nadh_c+0.25*M_atp_c,M_nadph_c,0,inf;
+r_ox,2*M_nadh_c+M_o2_c,1.5*M_atp_c,-inf,inf;
+
+// ExtracellularExchange
+r_glk,M_glc_x+M_atp_c,M_g6p_c,0,inf;
+r_pts,M_glc_x+M_pep_c,M_g6p_c+M_pyr_c,0,inf;
+t_o2,M_o2_x,M_o2_c,0,inf;
+t_co2,M_co2_c,M_co2_x,0,inf;
+t_ribo,M_ribo_c,M_ribo_x,0,inf;
+t_ace,M_ace_c,M_ace_x,-inf,inf;
+t_bio,biomass_c,biomass_x,0,inf;

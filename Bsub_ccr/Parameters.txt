@@ -1,0 +1,3 @@
+Parameters
+Glc Uptake Kcat = 9 mM/g/h ( http://bionumbers.hms.harvard.edu/bionumber.aspx?&id=111945&ver=3&trm=glucose%20uptake%20bacillus)
+Glc Uptake Km = 0.0038mM (Mobley HLT et al. J of Bacteriology 1982 http://jb.asm.org/content/150/1/8.full.pdf)

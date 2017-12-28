@@ -1,0 +1,49 @@
+1 M_glc_uptake::M_glc_e --> M_g6p_c
+2 M_g6p_sink::M_g6p_c --> []
+3 M_xylosides_uptake::M_xylosides_e --> M_xylosides
+4 generation_of_xylose::M_xylosides --> M_xylose
+5 generation_of_xylulose::M_xylose --> M_xylulose
+6 generation_of_xylulose_5P::M_xylulose --> M_xylulose_5P
+7 transfer_of_xylulose_5P::M_xylulose_5P --> []
+8 generation_of_hpr::[] --> M_Hpr_c
+9 activation_of_hpr::M_Hpr_c --> M_HprSerP_c
+10 degrdation_HprSerP_active::M_HprSerP_c --> []
+11 generation_of_CcpA::[] --> M_CcpA_c
+12 activation_of_CcpA::M_CcpA_c+M_HprSerP_c --> M_CcpAHpr_c
+13 degrdation_CcpA_active::M_CcpAHpr_c --> []
+14 generation_of_XylR_deactive::XylR --> XylR_deactive
+15 degradation_XylR_deactive::XylR_deactive --> []
+16 M_eiiGlc_synthesis::[] --> eiiGlc
+17 M_xynP_synthesis::[] --> XynP
+18 M_xynB_synthesis::[] --> XynB
+19 M_xylR_synthesis::[] --> XylR
+20 M_xylA_synthesis::[] --> XylA
+21 M_xylB_synthesis::[] --> XylB
+22 M_HprK_synthesis::[] --> HprK
+23 degradation_eiiGlc::eiiGlc --> []
+24 degradation_XylR::XylR --> []
+25 degradation_XylA::XylA --> []
+26 degradation_XylB::XylB --> []
+27 degradation_XynP::XynP --> []
+28 degradation_XynB::XynB --> []
+29 degradation_HprK::HprK --> []
+
+1 HprK
+2 M_CcpAHpr_c
+3 M_CcpA_c
+4 M_HprSerP_c
+5 M_Hpr_c
+6 M_g6p_c
+7 M_xylose
+8 M_xylosides
+9 M_xylulose
+10 M_xylulose_5P
+11 XylA
+12 XylB
+13 XylR
+14 XylR_deactive
+15 XynB
+16 XynP
+17 eiiGlc
+18 M_glc_e
+19 M_xylosides_e

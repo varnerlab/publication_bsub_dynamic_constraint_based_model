@@ -1,0 +1,25 @@
+// ============================================================== //
+// Signal transduction/metabolic reactions -
+#pragma::metabolic_reaction_handler
+//
+// Record:
+// name (unique),reactants,products,reverse,forward
+//
+// Notes:
+// [] = system (not tracked)
+//
+// ============================================================= //
+//Transport Systems
+T_A,A_e,A_c,0,inf
+T_B,B_c,B_e,0,inf
+
+// Metabolism -
+r_A,A_c,B_c,0,inf
+
+// Protein Synthesis
+TA_synthesis,[],TA,0,inf
+TA_degradation,TA,[],0,inf
+E_synthesis,[],E,0,inf
+E_degradation,E,[],0,inf
+TB_synthesis,[],TB,0,inf
+TB_degradation,TB,[],0,inf
